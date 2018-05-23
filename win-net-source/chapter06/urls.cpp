@@ -2,6 +2,7 @@
 #include <cctype>
 #include <string>
 #include <vector>
+#include <iostream>
 
 #include "urls.h"
 
@@ -83,12 +84,22 @@ url_beg(string::const_iterator b, string::const_iterator e)
 
 			// `beg' marks the beginning of the protocol-name
 			iter beg = i;
-			while (beg != b && isalpha(beg[-1]))
+			std::cout << *beg << std::endl;
+			std::cout << *(beg-1) << std::endl;
+			//while (beg != b && isalpha(beg[-1]))
+			while (isalpha(beg[-1]))
+			{
+				std::cout << beg[-1] << std::endl;
 				--beg;
+			}
 
 			// is there at least one appropriate character before and after the separator?
-			if (beg != i && !not_url_char(i[sep.size()]))
+			//if (beg != i && !not_url_char(i[sep.size()]))
+			if (!not_url_char(i[sep.size()]))
+			{
+				std::cout << i[sep.size()] << std::endl;
 				return beg;
+			}
 		}
 
 		// the separator we found wasn't part of a \s-1URL\s0; advance `i' past this separator
